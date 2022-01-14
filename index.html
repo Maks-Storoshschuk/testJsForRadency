@@ -13,12 +13,11 @@
     <h3>Category</h3>
     <h3>Content</h3>
     <h3>Details</h3>
-    <div class="edit"><img src="pic/edit.png" alt="edit"></div>
-    <div class="archive"><img src="pic/archive.jpg" alt="archive"></div>
-    <div class="delete" ><img src="pic/delete.png" alt="delete"></div>
+    <button id="showForm"><img src="pic/edit.png" alt="edit"></button>
+    <button id="showArchive"><img src="pic/archive.jpg" alt="archive"></button>
 </header>
 
-<div class="input">
+<div id="input" class="hide">
     <form action="">
         <input type="text" id="name" placeholder="Name">
         <select name="category" id="category">
@@ -32,7 +31,32 @@
     </form>
 </div>
 
-<section id="list">
+<section id="list"></section>
+<section id="counter">
+    <table>
+        <tr>
+            <th>Note Category</th>
+            <th>Active</th>
+            <th>Archived</th>
+        </tr>
+        <tr>
+            <td><img src="pic/task.png" alt="task">Task</td>
+            <td id="ActiveTask"></td>
+            <td id="ArchivedTask"></td>
+        </tr>
+        <tr>
+            <td><img src="pic/images.png" alt="task">Random Though</td>
+            <td id="ActiveRandom"></td>
+            <td id="ArchivedRandom"></td>
+        </tr>
+        <tr>
+            <td><img src="pic/idea.jfif" alt="task">Idea</td>
+            <td id="ActiveIdea"></td>
+            <td id="ArchivedIdea"></td>
+        </tr>
+    </table>
+</section>
+<section id="archive">
 </section>
 
 <!--<script src="test_Maks_Storoshschuk.js"></script>-->

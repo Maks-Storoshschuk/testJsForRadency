@@ -23,8 +23,18 @@ header{
     width: 90%;
     margin-left: 5%;
 }
-.list   {
+#list   {
     width: 90%;
     margin-left: 5%;
     background-color: lightblue;
+}
+table {
+    margin-left: 5%;
+    width: 90%;
+}
+tr th {
+    width: 33.3333%;
+}
+.hide {
+    display: none;
 }
