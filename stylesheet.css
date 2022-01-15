@@ -27,20 +27,16 @@ h3 {
     margin-left: 5%;
 }
 #showArchive{
-    margin-left: 82.8% ;
-    position: absolute;
+
+}
+#showForm {
+margin-left: 60px;
 }
 
 #header h3 {
     width: 17%;
     text-align: center;
 }
-
-#showForm {
-    margin-left: 80.2%;
-    position: absolute;
-}
-
 #list {
     width: 90%;
     margin-left: 5%;
