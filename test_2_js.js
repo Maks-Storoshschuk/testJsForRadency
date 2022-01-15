@@ -115,14 +115,12 @@ function archiveObject(index) {
     archiveDiv.className = 'hide';
 }
 
-function editObject(index) {
-    list.findIndex((element, index) => {
-        addName.value = element.name;
-        addCategory.value = element.category;
-        addContent.value = element.content;
-        addDate.value = element.date;
-    });
-    list.splice(index, 1);
+function editObject(id) {
+        addName.value = list[id].name;
+        addCategory.value = list[id].category;
+        addContent.value = list[id].content;
+        addDate.value = list[id].date;
+    list.splice(id, 1);
     form.className = 'show';
     refresh();
 }

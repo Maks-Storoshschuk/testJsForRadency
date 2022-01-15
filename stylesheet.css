@@ -28,7 +28,7 @@ h3 {
 }
 #showArchive{
     margin-left: 82.8% ;
-    position: fixed;
+    position: absolute;
 }
 
 #header h3 {
@@ -37,8 +37,8 @@ h3 {
 }
 
 #showForm {
-    margin-left: 80.2% ;
-    position: fixed;
+    margin-left: 80.2%;
+    position: absolute;
 }
 
 #list {
