@@ -1,40 +1,157 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
+
 .d-flex {
     display: flex;
-    justify-content: space-around;
     align-items: center;
     margin-top: 10px;
 }
+
 img {
     height: 40px;
     width: 40px;
 }
-h3{
+
+h3 {
     font-size: 32px;
 }
-header{
-    background-color: gainsboro ;
+
+#header {
+    background-color: darkgray;
     color: white;
     border-radius: 10px;
     height: 100px;
     width: 90%;
     margin-left: 5%;
 }
-#list   {
+#showArchive{
+    margin-left: 82.8% ;
+    position: fixed;
+}
+
+#header h3 {
+    width: 17%;
+    text-align: center;
+}
+
+#showForm {
+    margin-left: 80.2% ;
+    position: fixed;
+}
+
+#list {
     width: 90%;
     margin-left: 5%;
-    background-color: lightblue;
 }
+
 table {
     margin-left: 5%;
     width: 90%;
 }
+
 tr th {
     width: 33.3333%;
 }
+
 .hide {
     display: none;
 }
+
+.notes p {
+    width: 16%;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.notes {
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: lightblue;
+}
+
+.notes button {
+    margin-right: 5px;
+}
+
+#categoryPic {
+    border: 1px solid black;
+    margin-left: 5px;
+}
+
+#input {
+    margin-top: 10px;
+    margin-left: 5%;
+    width: 90%;
+    background-color: cadetblue;
+    border-radius: 5px;
+}
+
+#input input, select {
+    font-size: 20px;
+    width: 20%;
+    height: 30px;
+    margin: 10px;
+}
+
+#input button {
+    background-color: limegreen;
+    border-radius: 10px;
+    height: 30px;
+    width: 8%;
+    color: white;
+    font-weight: bold;
+}
+
+#counter {
+    background-color: cadetblue;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-top: 20px;
+    padding-bottom: 12px;
+}
+
+#counter th{
+    color: white;
+    font-size: 28px;
+}
+td{
+    color: white;
+    font-size: 24px;
+    text-align: center;
+}
+.NoteCategory{
+    text-align: left;
+}
+.NoteCategory img{
+    position: relative;
+    top: 12px;
+    margin-left: 10%;
+}
+#archive{
+    margin-top: 20px;
+    width: 90%;
+    margin-left: 5%;
+}
+#archiveOne {
+    background-color: lightsteelblue;
+    margin-bottom: 10px;
+    height: 50px;
+    border-radius: 5px;
+}
+#archiveOne p{
+    width: 45%;
+    text-align: center;
+    font-size: 24px;
+}
+#archiveOne button{
+    margin-left: 5px;
+}
+body{
+    background-color: black;
+}
+
+
