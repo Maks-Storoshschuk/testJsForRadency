@@ -1,47 +1,38 @@
+import {archivedList, list} from "./constants";
+
 let addButton = document.getElementById('add-baton');
 let addName = document.getElementById('name');
 let addCategory = document.getElementById('category');
 let addContent = document.getElementById('content');
-let addDate = document.getElementById('date');
 let showFormButton = document.getElementById('showForm');
 let showArchiveButton = document.getElementById('showArchive');
 let form = document.getElementById('input');
 let archiveDiv = document.getElementById('archive');
 
-let list = [
-    {name: 'магазин', created: '2022-01-13', category: '2', content: 'купити молоко і зубну пасту', date: '2022-02-05'},
-    {name: 'день народження', created: '2022-01-14', category: '3', content: 'підготувати поляну', date: '2022-01-23'},
-    {name: 'уроки англійської', created: '2022-01-14', category: '1', content: 'підготуватись до співбесіди', date: '2022-01-17'},
-    {name: 'рибка', created: '2022-01-15', category: '2', content: 'купити корм і компресор', date: '2022-01-17'},
-    {name: 'день народження дівчини', created: '2022-01-15', category: '2', content: 'купити подарунок', date: '2022-04-08'},
-    {name: 'мтоцикл', created: '2022-01-17', category: '3', content: 'підготувати мотоцикл до сезону', date: '2022-03-01'},
-    {name: 'зустріч однокласників', created: '2022-01-15', category: '2', content: 'не напитись', date: '2022-06-03'},
-];
-let archivedList = [
-    {name: 'зразок', created: '2022-01-14', category: '2', content: 'зробити стилізацію', date: '2022-01-01'}
-];
 
 addButton.addEventListener('click', (e) => {
-    if (addName.value === '' || addCategory.value === '' || addContent.value === '' || addDate.value === '') {
+    if (addName.value === '' || addCategory.value === '' || addContent.value === '') {
         return alert('Someone field is empty!(');
     }
+    e.preventDefault();
     let maxDate = new Date(Date.now());
-    let isoDate = maxDate.toISOString();
-    let date = isoDate.substr(0, 10);
+    let date = maxDate.toISOString().substr(0, 10);
+    if (Date.parse(addContent.value)) {
+        console.log('hsf')
+        let parseDate = new Date(Date.parse(addContent.value));
+        var okParseDate = parseDate.toISOString().substr(0, 10);
+    }
     let object = {
         name: addName.value,
         created: date,
         category: addCategory.value,
         content: addContent.value,
-        date: addDate.value,
+        date: okParseDate || '',
     }
     list.push(object);
 
     refresh();
-    e.preventDefault();
 })
-
-let pictures = ['pic/task.png', 'pic/images.png', 'pic/idea.jfif', 'Task', 'Random Though', 'Idea'];
 
 function refresh() {
     let write = '';
@@ -49,12 +40,18 @@ function refresh() {
     let activeRandomCount = 0;
     let activeIdeaCount = 0;
     list.forEach((element) => {
+        let pic = 'pic/idea.jfif';
+        if (element.category === 'Task') {
+            pic = 'pic/task.png';
+        } else if (element.category === 'Random Though') {
+            pic = 'pic/images.png'
+        }
         write += `
              <div class='notes d-flex' >
-                <img id='categoryPic' src='${pictures[element.category - 1]}' alt='${pictures[element.category - 1 + 3]}'>
+                <img id='categoryPic' src='${pic}' alt='${element.category}'>
                 <p class='name'>${element.name}</p>
                 <p class='created'>${element.created}</p>
-                <p class='category'>${pictures[element.category - 1 + 3]}</p>
+                <p class='category'>${element.category}</p>
                 <p class='content'>${element.content}</p>
                 <p class='date'>${element.date}</p>
                 <button id='${list.indexOf(element)}' onclick='editObject(this.id)'><img src='pic/edit.png' alt='edit'></button>
@@ -62,13 +59,13 @@ function refresh() {
                 <button id='${list.indexOf(element)}' onclick='deleteObject(this.id)'><img src='pic/delete.png' alt='delete'></button>
              </div>`
         switch (element.category) {
-            case '1':
+            case 'Task':
                 activeTaskCount = activeTaskCount + 1;
                 break;
-            case '2':
+            case 'Random Though':
                 activeRandomCount = activeRandomCount + 1;
                 break;
-            case '3':
+            case 'Idea':
                 activeIdeaCount = activeIdeaCount + 1;
                 break;
         }
@@ -78,13 +75,13 @@ function refresh() {
     let archivedIdeaCount = 0;
     for (const archived of archivedList) {
         switch (archived.category) {
-            case '1':
+            case 'Task':
                 archivedTaskCount = archivedTaskCount + 1;
                 break;
-            case '2':
+            case 'Random Though':
                 archivedRandomCount = archivedRandomCount + 1;
                 break;
-            case '3':
+            case 'Idea':
                 archivedIdeaCount = archivedIdeaCount + 1;
                 break;
         }
@@ -116,10 +113,9 @@ function archiveObject(index) {
 }
 
 function editObject(id) {
-        addName.value = list[id].name;
-        addCategory.value = list[id].category;
-        addContent.value = list[id].content;
-        addDate.value = list[id].date;
+    addName.value = list[id].name;
+    addCategory.value = list[id].category;
+    addContent.value = list[id].content;
     list.splice(id, 1);
     form.className = 'show';
     refresh();
@@ -138,12 +134,15 @@ showArchiveButton.addEventListener('click', (e) => {
     } else archiveDiv.className = 'hide';
     archivedList.forEach((element) => {
         archive += `
+             <div id='archiveDiv=${archivedList.indexOf(element)}'></div> 
              <div class='d-flex' id='archiveOne' >
-                <p class='name'>${element.name}</p>
+                <p class='name' onmouseenter='readArchiveNote(${archivedList.indexOf(element)})'>${element.name}</p>
                 <p class='created'>${element.created}</p>
                 <button id='${archivedList.indexOf(element)}' onclick='unArchiveObject(this.id)'><img src='pic/unArchived.png' alt='UnArchive'></button>
                 <button id='${archivedList.indexOf(element)}' onclick='deleteObjectArchive(this.id)'><img src='pic/delete.png' alt='delete'></button>
-             </div>`
+             </div>
+           
+             `
     });
     document.getElementById('archive').innerHTML = archive;
 })
@@ -161,6 +160,26 @@ function unArchiveObject(index) {
     refresh();
     archiveDiv.className = 'hide';
     showArchiveButton.click();
+}
+
+function readArchiveNote(index){
+    let readArchiveNote = document.getElementById(`archiveDiv=${index}`);
+    readArchiveNote.innerHTML = `
+        <p class='name'>${archivedList[index].name}</p>
+        <p class='created'>${archivedList[index].created}</p>
+        <p class='category'>${archivedList[index].category}</p>
+        <p class='content'>${archivedList[index].content}</p>
+        <p class='date'>${archivedList[index].date}</p>
+    `
+        readArchiveNote.className='notes d-flex archive'
+    if (index === archivedList.length-1 && index >=1){
+        document.getElementById(`archiveDiv=${index-1}`).className = 'hide';
+    } else  if (index >= 1 && index < archivedList.length - 1) {
+        document.getElementById(`archiveDiv=${index + 1}`).className = 'hide'
+        document.getElementById(`archiveDiv=${index - 1}`).className = 'hide';
+    } else if (index === 0 && archivedList.length>1){
+        document.getElementById(`archiveDiv=${index + 1}`).className = 'hide'
+    }
 }
 
 refresh();
