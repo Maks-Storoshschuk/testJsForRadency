@@ -1,5 +1,3 @@
-import {archivedList, list} from "./constants";
-
 let addButton = document.getElementById('add-baton');
 let addName = document.getElementById('name');
 let addCategory = document.getElementById('category');
@@ -9,6 +7,54 @@ let showArchiveButton = document.getElementById('showArchive');
 let form = document.getElementById('input');
 let archiveDiv = document.getElementById('archive');
 
+let list = [
+    {
+        name: 'магазин',
+        created: '2022-01-13',
+        category: 'Random Though',
+        content: 'купити молоко і зубну пасту',
+        date: '2022-02-05'
+    },
+    {
+        name: 'день народження',
+        created: '2022-01-14',
+        category: 'Idea',
+        content: 'підготувати поляну',
+        date: '2022-01-23'
+    },
+    {
+        name: 'уроки англійської',
+        created: '2022-01-14',
+        category: 'Random Though',
+        content: 'підготуватись до співбесіди',
+        date: '2022-01-17'
+    },
+    {name: 'рибка', created: '2022-01-15', category: 'Idea', content: 'купити корм і компресор', date: '2022-01-17'},
+    {
+        name: 'день народження дівчини',
+        created: '2022-01-15',
+        category: 'Task',
+        content: 'купити подарунок',
+        date: '2022-04-08'
+    },
+    {
+        name: 'мтоцикл',
+        created: '2022-01-17',
+        category: 'Random Though',
+        content: 'підготувати мотоцикл до сезону',
+        date: '2022-03-01'
+    },
+    {
+        name: 'зустріч однокласників',
+        created: '2022-01-15',
+        category: 'Idea',
+        content: 'не напитись',
+        date: '2022-06-03'
+    },
+];
+let archivedList = [
+    {name: 'зразок', created: '2022-01-14', category: 'Idea', content: 'зробити стилізацію', date: '2022-01-01'}
+];
 
 addButton.addEventListener('click', (e) => {
     if (addName.value === '' || addCategory.value === '' || addContent.value === '') {
@@ -19,7 +65,7 @@ addButton.addEventListener('click', (e) => {
     let date = maxDate.toISOString().substr(0, 10);
     if (Date.parse(addContent.value)) {
         console.log('hsf')
-        let parseDate = new Date(Date.parse(addContent.value));
+        let parseDate = new Date(Date.parse(addContent.value)+1);
         var okParseDate = parseDate.toISOString().substr(0, 10);
     }
     let object = {
@@ -33,6 +79,7 @@ addButton.addEventListener('click', (e) => {
 
     refresh();
 })
+
 
 function refresh() {
     let write = '';
@@ -162,7 +209,7 @@ function unArchiveObject(index) {
     showArchiveButton.click();
 }
 
-function readArchiveNote(index){
+function readArchiveNote(index) {
     let readArchiveNote = document.getElementById(`archiveDiv=${index}`);
     readArchiveNote.innerHTML = `
         <p class='name'>${archivedList[index].name}</p>
@@ -171,13 +218,13 @@ function readArchiveNote(index){
         <p class='content'>${archivedList[index].content}</p>
         <p class='date'>${archivedList[index].date}</p>
     `
-        readArchiveNote.className='notes d-flex archive'
-    if (index === archivedList.length-1 && index >=1){
-        document.getElementById(`archiveDiv=${index-1}`).className = 'hide';
-    } else  if (index >= 1 && index < archivedList.length - 1) {
+    readArchiveNote.className = 'notes d-flex archive'
+    if (index === archivedList.length - 1 && index >= 1) {
+        document.getElementById(`archiveDiv=${index - 1}`).className = 'hide';
+    } else if (index >= 1 && index < archivedList.length - 1) {
         document.getElementById(`archiveDiv=${index + 1}`).className = 'hide'
         document.getElementById(`archiveDiv=${index - 1}`).className = 'hide';
-    } else if (index === 0 && archivedList.length>1){
+    } else if (index === 0 && archivedList.length > 1) {
         document.getElementById(`archiveDiv=${index + 1}`).className = 'hide'
     }
 }
